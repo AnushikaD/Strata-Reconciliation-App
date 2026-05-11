@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import io
 import os
 import pickle
@@ -17,11 +18,12 @@ from openpyxl import Workbook, load_workbook
 
 
 APP_ROOT = Path(__file__).parent
-UPLOAD_ROOT = APP_ROOT / "uploads"
+RUNTIME_ROOT = Path(tempfile.gettempdir()) if os.environ.get("VERCEL") else APP_ROOT
+UPLOAD_ROOT = RUNTIME_ROOT / "strata_uploads"
 UPLOAD_ROOT.mkdir(exist_ok=True)
-CACHE_PATH = APP_ROOT / "last_result.pkl"
+CACHE_PATH = RUNTIME_ROOT / "strata_last_result.pkl"
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public/static", static_url_path="/static")
 app.config["MAX_CONTENT_LENGTH"] = 80 * 1024 * 1024
 
 

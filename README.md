@@ -21,6 +21,18 @@ python -m waitress --host=0.0.0.0 --port=$PORT app:app
 
 Railway will install dependencies from `requirements.txt`.
 
+## Vercel Hosting
+
+This app includes `vercel.json` and can be imported into Vercel from GitHub.
+
+Vercel will detect the Flask `app` in `app.py` and install dependencies from `requirements.txt`.
+
+Important Vercel notes:
+
+- Uploaded files are processed in temporary serverless storage.
+- Large PDF uploads may hit Vercel request/runtime limits.
+- Export downloads use the last processed result in the current serverless runtime, so Railway or local office hosting is still better for heavier accounting reports.
+
 ## Inputs
 
 - Balance Sheet Report: PDF, Excel, or CSV
